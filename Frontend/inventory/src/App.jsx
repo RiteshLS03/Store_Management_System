@@ -1,7 +1,7 @@
 import React from "react";
 // import { createRoot  } from "react-dom/client";
 import { createBrowserRouter, Link, Outlet } from "react-router-dom";
-import Login from "./components/Login";
+import LoginUI from "./components/LoginUI";
 
 // const App = () => {
 //   return <Outlet />;
@@ -10,11 +10,11 @@ import Login from "./components/Login";
 export const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
+    element: <LoginUI />,
     errorElement: (
       <h1>
         Something Went Wrong
-        <Link to={"/"}>Login</Link>
+        <Link to={"/"}> Login</Link>
       </h1>
     ),
   },
