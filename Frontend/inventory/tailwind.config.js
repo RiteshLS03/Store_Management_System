@@ -7,6 +7,7 @@ export default {
         hello: "#7A999C",
         guys: "#567281",
         login: "#5F7C8D",
+        loginbtncolor: "#4B687A",
       },
       fontFamily: {
         istok: "Istok Web",

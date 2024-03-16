@@ -18,15 +18,36 @@ const LoginUI = () => {
         </div>
         <div className="flex justify-center items-center">
           <div className=" justify-between gap-4">
-            <div className="flex gap-10">
+            <div className="flex gap-10 font-istok">
               {" "}
-              <button type="button" onClick={() => setLoginForm(true)}>
+              <button
+                className="text-3xl font-istok font-extrabold"
+                type="button"
+                onClick={() => setLoginForm(true)}
+                // style={{ color: ["#5F7C8D"] }}
+                style={
+                  loginForm
+                    ? {
+                        color: ["#5F7C8D"],
+                        borderBottom: "#5F7C8D 5px solid",
+                      }
+                    : { color: "#5F7C8D", opacity: "75%" }
+                }
+              >
                 Login
               </button>
               <button
+                className="text-3xl  font-istok font-extrabold"
                 type="button"
                 onClick={() => setLoginForm(false)}
-                className=""
+                style={
+                  loginForm
+                    ? {
+                        color: "#5F7C8D",
+                        opacity: "75%",
+                      }
+                    : { color: ["#5F7C8D"], borderBottom: "#5F7C8D 5px solid" }
+                }
               >
                 SignUp
               </button>
