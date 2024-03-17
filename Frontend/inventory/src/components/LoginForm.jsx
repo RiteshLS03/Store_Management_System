@@ -5,10 +5,6 @@ const LoginForm = () => {
     <div className="flex">
       <form className="grid gap-8">
         <div className="grid my-4">
-          {" "}
-          {/* <label htmlFor="username" className="my-4">
-            Username
-          </label> */}
           <input
             className="border-b-2 w-[500px] p-2 border-[#5F7C8D] font-istok text-xl"
             type="text"
@@ -18,7 +14,6 @@ const LoginForm = () => {
           />
         </div>
         <div>
-          {/* <label htmlFor="password">Password</label> */}
           <input
             className="border-b-2 w-[500px] p-2 border-[#5F7C8D] font-istok text-xl"
             type="password"
