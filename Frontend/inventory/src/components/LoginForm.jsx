@@ -10,7 +10,7 @@ const LoginForm = () => {
             type="text"
             id="username"
             name="username"
-            placeholder="Enter your Username or Email"
+            placeholder="Enter your Email"
           />
         </div>
         <div>

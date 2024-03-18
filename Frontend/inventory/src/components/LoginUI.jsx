@@ -6,7 +6,7 @@ import SignUp from "./SignUp";
 const LoginUI = () => {
   const [loginForm, setLoginForm] = useState(true);
   return (
-    <div className="flex ">
+    <div className="flex bg-[#f9f9f9]">
       <div className="mr-10 w-1/2">
         <img src={LoginLeft} alt="Login" className="h-lvh rounded-xl" />
       </div>

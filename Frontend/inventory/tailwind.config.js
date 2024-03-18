@@ -8,9 +8,11 @@ export default {
         guys: "#567281",
         login: "#5F7C8D",
         loginbtncolor: "#4B687A",
+        whitebg: "#f9f9f9",
       },
       fontFamily: {
         istok: "Istok Web",
+        poppins: "Poppins",
       },
     },
   },
