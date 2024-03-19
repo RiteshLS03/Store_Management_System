@@ -1,12 +1,11 @@
-// import { CiSearch } from "react-icons/ci";
-// import profile from "../assets/profile.jpg";
-import { CompHeader } from "./CompHeader";
+import { CiSearch } from "react-icons/ci";
+import profile from "../assets/profile.jpg";
 
-const DashboardUI = () => {
+export const CompHeader = ({ name }) => {
   return (
-    <div className="px-6 py-4 h-screen">
-      {/* <div className="flex justify-between items-center">
-        <p className="font-bold font-poppins">My Dashboard</p>
+    <div className="">
+      <div className="flex justify-between items-center">
+        <p className="font-bold font-poppins">{name}</p>
         <div className="flex justify-start items-center">
           <button
             type="button"
@@ -33,16 +32,7 @@ const DashboardUI = () => {
             </button>
           </div>
         </div>
-      </div> */}
-      <CompHeader name={"My Dashboard"} />
-      <div className="flex justify-center items-center py-12">
-        <h1 className="font-bold text-4xl">Welcome to Dashboard!</h1>
       </div>
-      {/* <div className="flex justify-center items-center py-12">
-        <h1 className="font-light text-4xl">Welcome to Dashboard!</h1>
-      </div> */}
     </div>
   );
 };
-
-export default DashboardUI;

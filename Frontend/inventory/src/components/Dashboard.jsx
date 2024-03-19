@@ -5,6 +5,7 @@ import { BiSolidPurchaseTagAlt } from "react-icons/bi";
 import { GoIssueClosed } from "react-icons/go";
 import PurchaseUI from "./PurchaseUI";
 import IssueUI from "./IssueUI";
+// import DashboardUI from "./DashboardUI.1";
 import DashboardUI from "./DashboardUI";
 
 const Dashboard = () => {
@@ -14,9 +15,9 @@ const Dashboard = () => {
     issue: false,
   });
   return (
-    <div className="bg-[#f9f9f9] flex w-lvw font-poppins">
-      <div className="w-1/4 p-12 bg bg-white rounded-3xl">
-        <div className="grid gap-10">
+    <div className="bg-[#f9f9f9] flex h-screen font-poppins">
+      <div className="w-1/4 p-12 bg my-4 bg-white rounded-3xl">
+        <div className="grid gap-10 ">
           <button
             className="flex justify-center items-center gap-4"
             onClick={() =>
