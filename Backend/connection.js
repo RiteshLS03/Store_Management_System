@@ -16,5 +16,5 @@ let connection = mysqlConnection.connect((err) => {
     console.log("Database connected successfully");
   }
 });
-
+// added
 module.exports = mysqlConnection;
