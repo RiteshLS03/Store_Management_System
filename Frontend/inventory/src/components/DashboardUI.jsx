@@ -38,13 +38,10 @@ const DashboardUI = () => {
       <div className="flex justify-center items-center py-12">
         <h1 className="font-bold text-4xl">Welcome to Dashboard!</h1>
       </div>
-<<<<<<< HEAD
       <div className="flex justify-center items-center"></div>
-=======
       {/* <div className="flex justify-center items-center py-12">
         <h1 className="font-light text-4xl">Welcome to Dashboard!</h1>
       </div> */}
->>>>>>> 33960bff50a0ca6255c044faaf39be382bd1c202
     </div>
   );
 };

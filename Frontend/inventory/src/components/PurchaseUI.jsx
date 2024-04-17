@@ -7,7 +7,6 @@ const PurchaseUI = () => {
     <div className="px-6 py-4 h-screen">
       <CompHeader name={"Purchase"} />
       <InputTable />
-<<<<<<< HEAD
       <div className="flex justify-center items-center">
         <table className="table-auto">
           <thead className="">
@@ -48,8 +47,6 @@ const PurchaseUI = () => {
           </tbody>
         </table>
       </div>
-=======
->>>>>>> 33960bff50a0ca6255c044faaf39be382bd1c202
     </div>
   );
 };

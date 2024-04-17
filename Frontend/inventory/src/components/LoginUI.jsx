@@ -19,7 +19,6 @@ const LoginUI = () => {
         <div className="flex justify-center items-center">
           <div className=" justify-between gap-4">
             <div className="flex gap-10 font-istok">
-              {" "}
               <button
                 className="text-3xl font-istok font-extrabold"
                 type="button"
