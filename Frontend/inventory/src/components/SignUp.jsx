@@ -1,26 +1,25 @@
-import { Formik } from "formik";
-import React, { useState } from "react";
+// import { Formik } from "formik";
+import React, { useEffect, useState } from "react";
 
 const SignUp = () => {
   const [newUserAdd, setNewUserAdd] = useState({
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
-  // const handleFormChange = (e) => {
-  //   setNewUserAdd({ ...previousState, name: e.target.value });
+
+  // useEffect(async () => {}, []);
+
+  // const handleSignUpClick = async () => {
+  //   const response = await fetch("http://localhost:5001/new", {
+  //     method: "POST",
+  //     headers: { "Content-type": "application/json" },
+  //     body: JSON.stringify(newUserAdd),
+  //   }).then((res) => console.log(res));
+  //   const data = await response.json();
+  //   console.log(data);
   // };
-  const handleSignUpClick = (e) => {
-    if (newUserAdd.password === newUserAdd.confirmPassword) {
-      alert("OK");
-    } else {
-      alert("Password is incorrect");
-    }
-    try {
-      fetch({});
-    } catch (error) {}
-  };
+
   return (
     <div className="flex">
       <form className="grid gap-8">
@@ -82,7 +81,7 @@ const SignUp = () => {
           type="button"
           className="p-2 font-istok text-2xl"
           style={{ backgroundColor: "#4B687A", color: "#fff" }}
-          onClick={(e) => handleSignUpClick(e)}
+          onClick={() => handleSignUpClick()}
         >
           Sign Up
         </button>

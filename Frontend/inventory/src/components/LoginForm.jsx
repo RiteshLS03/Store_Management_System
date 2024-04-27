@@ -22,6 +22,15 @@ const LoginForm = () => {
             placeholder="Enter Password"
           />
         </div>
+        <div className="">
+          <button
+            type="button"
+            className="px-2 font-istok text-xl rounded-lg"
+            style={{ backgroundColor: "#4B687A", color: "#fff" }}
+          >
+            Forgot Password
+          </button>
+        </div>
         <button
           type="button"
           className="p-2 font-istok text-2xl"
