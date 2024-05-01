@@ -8,17 +8,35 @@ const SignUp = () => {
     password: "",
   });
 
-  // useEffect(async () => {}, []);
+  // useEffect(() => handleSignUpClick(), []);
 
   // const handleSignUpClick = async () => {
-  //   const response = await fetch("http://localhost:5001/new", {
+  //   const response = await fetch("http://localhost:5001/api/users/register", {
   //     method: "POST",
-  //     headers: { "Content-type": "application/json" },
   //     body: JSON.stringify(newUserAdd),
-  //   }).then((res) => console.log(res));
-  //   const data = await response.json();
+  //   });
+  //   const data = response.json();
   //   console.log(data);
   // };
+
+  const handleSignUpClick = async () => {
+    try {
+      const response = await fetch("http://localhost:5001/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUserAdd),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to register user.");
+      }
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
 
   return (
     <div className="flex">

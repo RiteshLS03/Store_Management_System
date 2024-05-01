@@ -8,6 +8,7 @@ const mysql2 = require("mysql2");
 //   password: "Ls03@1234",
 //   database: "inventory",
 // });
+const cors = require("cors");
 
 const mysqlConnection = mysql2.createConnection({
   host: process.env.DATABASE_HOST,

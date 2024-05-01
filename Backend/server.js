@@ -2,12 +2,14 @@
 const connection = require("./connection");
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 const dotenv = require("dotenv").config();
 const bodyParser = require("body-parser");
-const cors = require("cors");
+// const cors = require("cors");
 const userRoute = require("./Routes/userRoutes");
 const errorHandler = require("./Middleware/errorMiddleware");
+app.use(cors());
 
 //Error Middleware
 app.use(errorHandler);
