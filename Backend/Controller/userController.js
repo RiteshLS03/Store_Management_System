@@ -56,10 +56,10 @@
 // module.exports = {
 //   registerUser,
 // };
-const cors = require("cors");
 
 const asyncHandler = require("express-async-handler");
 const connection = require("../connection");
+const { isEmail } = require("validator");
 
 const registerUser = asyncHandler(async (req, res) => {
   try {
@@ -72,7 +72,12 @@ const registerUser = asyncHandler(async (req, res) => {
     } else if (password.length < 6) {
       return res
         .status(400)
-        .json({ error: "Minimum 6 characters are required" });
+        .json({ error: "Minimum 6 characters are required in password" });
+    } else if (!isEmail(email)) {
+      return res
+        .status(400)
+        .json({ error: "Please enter valid email address" });
+    } else {
     }
 
     const checkUser = (email) => {
@@ -90,7 +95,6 @@ const registerUser = asyncHandler(async (req, res) => {
         );
       });
     };
-
     const createUser = async (name, email, password) => {
       try {
         connection.query(
@@ -106,8 +110,8 @@ const registerUser = asyncHandler(async (req, res) => {
         }
       }
     };
-
     const userExists = await checkUser(email);
+    // res.json(userExists).send(); // sended false if the email is not registered
     if (userExists) {
       res.status(400).json({ error: "Email has already been registered" });
     } else {

@@ -51,7 +51,7 @@ const LoginUI = () => {
                 SignUp
               </button>
             </div>
-            {loginForm ? <LoginForm /> : <SignUp />}
+            {loginForm ? <LoginForm /> : <SignUp setLoginForm={setLoginForm} />}
           </div>
         </div>
       </div>

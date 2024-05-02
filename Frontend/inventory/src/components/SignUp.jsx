@@ -1,12 +1,20 @@
 // import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
+// Alert importing
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
-const SignUp = () => {
+const MySwal = withReactContent(Swal);
+
+const SignUp = ({ setLoginForm }) => {
+  // useEffect(() => {}, [setLoginForm]);
   const [newUserAdd, setNewUserAdd] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   // useEffect(() => handleSignUpClick(), []);
 
@@ -28,13 +36,17 @@ const SignUp = () => {
         },
         body: JSON.stringify(newUserAdd),
       });
-      if (!response.ok) {
-        throw new Error("Failed to register user.");
-      }
+
       const data = await response.json();
       console.log(data);
+      MySwal.fire({
+        icon: data.error ? "error" : "success",
+        // title: "Success!",
+        text: data?.error || data?.message,
+      });
+      setLoginForm(true);
     } catch (error) {
-      console.error("Error:", error.message);
+      console.log(error);
     }
   };
 
@@ -90,8 +102,9 @@ const SignUp = () => {
             placeholder="Confirm Password"
             required="true"
             onChange={(e) => {
-              setNewUserAdd({ ...newUserAdd, confirmPassword: e.target.value });
-              console.log(newUserAdd);
+              // setNewUserAdd({ ...newUserAdd, confirmPassword: e.target.value });
+              // console.log(newUserAdd);
+              setConfirmPassword(e.target.value);
             }}
           />
         </div>

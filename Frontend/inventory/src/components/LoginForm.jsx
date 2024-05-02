@@ -1,6 +1,15 @@
 import { Formik } from "formik";
+import { useState } from "react";
 
 const LoginForm = () => {
+  const [loginForm, setLoginForm] = useState({
+    email: "",
+    password: "",
+  });
+  const handleLoginClick = () => {
+    console.log(loginForm);
+    const response = fetch("");
+  };
   return (
     <div className="flex">
       <form className="grid gap-8">
@@ -11,6 +20,9 @@ const LoginForm = () => {
             id="username"
             name="username"
             placeholder="Enter your Email"
+            onChange={(e) => {
+              setLoginForm({ ...loginForm, email: e.target.value });
+            }}
           />
         </div>
         <div>
@@ -20,6 +32,9 @@ const LoginForm = () => {
             id="password"
             name="password"
             placeholder="Enter Password"
+            onChange={(e) => {
+              setLoginForm({ ...loginForm, password: e.target.value });
+            }}
           />
         </div>
         <div className="">
@@ -35,6 +50,7 @@ const LoginForm = () => {
           type="button"
           className="p-2 font-istok text-2xl"
           style={{ backgroundColor: "#4B687A", color: "#fff" }}
+          onClick={handleLoginClick}
         >
           Login
         </button>
