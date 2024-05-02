@@ -1,14 +1,30 @@
 import { Formik } from "formik";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const LoginForm = () => {
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
-  const handleLoginClick = () => {
+  const handleLoginClick = async () => {
     console.log(loginForm);
-    const response = fetch("");
+    const response = await fetch("http://localhost:5001/api/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginForm),
+    });
+    const data = await response.json();
+    MySwal.fire({
+      icon: data.error ? "error" : "success",
+      // title: "Success!",
+      text: data?.error || data?.message,
+    });
   };
   return (
     <div className="flex">
