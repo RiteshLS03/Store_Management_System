@@ -1,24 +1,14 @@
 const connection = require("../connection");
+const bcryptjs = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
+const jwt = require("jsonwebtoken");
+
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "2h" });
+};
 
 const loginUser = asyncHandler(async (req, res) => {
-  //   const { email, password } = req.body;
-  //   try {
-  //     const response = await new Promise((resolve, reject) => {
-  //       connection.query(
-  //         "SELECT * FROM users WHERE values (?,?)",
-  //         [email, password],
-  //         (error, results) => {
-  //           if (error) {
-  //             reject(error);
-  //           } else {
-  //             resolve(results);
-  //           }
-  //         }
-  //       );
-  //     });
-
-  //Chat GPT AI Code
+  //  AI Code
 
   const { email, password } = req.body;
   try {
@@ -35,9 +25,24 @@ const loginUser = asyncHandler(async (req, res) => {
               reject(new Error("User not found"));
             } else {
               const user = results[0];
-              if (user.password === password) {
+              const passwordMatch = bcryptjs.compare(password, user.password);
+              if (passwordMatch) {
                 // Password is correct
-                resolve(user);
+                // Generate the JWT Token
+                const token = generateToken(user.id);
+                const authUser = { user, token };
+                resolve(authUser);
+                +(
+                  // console.log(authUser);
+                  // Send the HTTP-only cookie
+                  res.cookie("token", token, {
+                    path: "/",
+                    httpOnly: true,
+                    expires: new Date(Date.now() + 1000 * 7200), // 2 Hours
+                    sameSite: "none",
+                    secure: true,
+                  })
+                );
               } else {
                 // Incorrect password
                 reject(new Error("Incorrect password"));
@@ -56,18 +61,6 @@ const loginUser = asyncHandler(async (req, res) => {
       .json({ message: "Authentication failed", error: error.message });
   }
 });
-
-//     if (response.length > 0) {
-//       res.status(200).json(response);
-//     } else {
-//       // Email doesn't exist in the database
-//       // Handle accordingly, e.g., return an error response
-//       res.status(404).json("Please register user!");
-//     }
-//   } catch (error) {
-//     // Handle database query error
-//   }
-// });
 
 module.exports = {
   loginUser,

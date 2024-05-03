@@ -59,6 +59,7 @@
 
 const asyncHandler = require("express-async-handler");
 const connection = require("../connection");
+const bcryptjs = require("bcryptjs");
 const { isEmail } = require("validator");
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -96,10 +97,14 @@ const registerUser = asyncHandler(async (req, res) => {
       });
     };
     const createUser = async (name, email, password) => {
+      // Encrypt the password before saving to the database
+
+      const salt = await bcryptjs.genSalt(10);
+      const hashedPassword = await bcryptjs.hash(password, salt);
       try {
         connection.query(
           "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-          [name, email, password]
+          [name, email, hashedPassword]
         );
         res.status(201).json({ message: "User registered successfully" });
       } catch (error) {

@@ -2,18 +2,18 @@
 const connection = require("./connection");
 const express = require("express");
 const app = express();
-// const cors = require("cors");
-
 const dotenv = require("dotenv").config();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoute = require("./Routes/userRoutes");
 const errorHandler = require("./Middleware/errorMiddleware");
-app.use(cors());
+const cookieParser = require("cookie-parser");
 
 //Error Middleware
 app.use(errorHandler);
 // MIDDLEWARE
+app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());

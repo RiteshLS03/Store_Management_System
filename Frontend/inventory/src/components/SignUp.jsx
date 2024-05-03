@@ -44,7 +44,9 @@ const SignUp = ({ setLoginForm }) => {
         // title: "Success!",
         text: data?.error || data?.message,
       });
-      setLoginForm(true);
+      if (!data.error) {
+        setLoginForm(true);
+      }
     } catch (error) {
       console.log(error);
     }

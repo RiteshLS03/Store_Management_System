@@ -21,7 +21,7 @@ const LoginForm = () => {
     });
     const data = await response.json();
     MySwal.fire({
-      icon: data.error ? "error" : "success",
+      icon: data?.error ? "error" : "success",
       // title: "Success!",
       text: data?.error || data?.message,
     });
