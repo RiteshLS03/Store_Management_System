@@ -28,27 +28,38 @@ const SignUp = ({ setLoginForm }) => {
   // };
 
   const handleSignUpClick = async () => {
-    try {
-      const response = await fetch("http://localhost:5001/api/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUserAdd),
-      });
+    if (confirmPassword == newUserAdd.password) {
+      try {
+        const response = await fetch(
+          "http://localhost:5001/api/users/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUserAdd),
+          }
+        );
 
-      const data = await response.json();
-      console.log(data);
-      MySwal.fire({
-        icon: data.error ? "error" : "success",
-        // title: "Success!",
-        text: data?.error || data?.message,
-      });
-      if (!data.error) {
-        setLoginForm(true);
+        const data = await response.json();
+        console.log(data);
+        MySwal.fire({
+          icon: data.error ? "error" : "success",
+          // title: "Success!",
+          text: data?.error || data?.message,
+        });
+        if (!data.error) {
+          setLoginForm(true);
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      MySwal.fire({
+        icon: "warning",
+        // title: "Success!",
+        text: "Please confirm password",
+      });
     }
   };
 

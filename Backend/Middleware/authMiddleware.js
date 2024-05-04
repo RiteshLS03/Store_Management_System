@@ -20,8 +20,8 @@ const findByEmail = (email) => {
 };
 
 const protect = asyncHandler(async (req, res, next) => {
-  // req.body.email;
   try {
+    const email = req.body.email;
     const token = req.cookies.token;
     if (!token) {
       res.status(401).json({ error: "Not authorized, please login" });

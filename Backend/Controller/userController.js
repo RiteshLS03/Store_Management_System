@@ -96,9 +96,27 @@ const registerUser = asyncHandler(async (req, res) => {
         );
       });
     };
-    const createUser = async (name, email, password) => {
-      // Encrypt the password before saving to the database
+    // const createUser = async (name, email, password) => {
+    //   // Encrypt the password before saving to the database
 
+    //   const salt = await bcryptjs.genSalt(10);
+    //   const hashedPassword = await bcryptjs.hash(password, salt);
+    //   try {
+    //     connection.query(
+    //       "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+    //       [name, email, hashedPassword]
+    //     );
+    //     res.status(201).json({ message: "User registered successfully" });
+    //   } catch (error) {
+    //     if (error.errno === 1062) {
+    //       res.status(409).json({ error: "User already exists" });
+    //     } else {
+    //       res.status(500).json({ error: "Something went wrong" });
+    //     }
+    //   }
+    // };
+
+    const createUser = async (name, email, password) => {
       const salt = await bcryptjs.genSalt(10);
       const hashedPassword = await bcryptjs.hash(password, salt);
       try {
@@ -106,15 +124,18 @@ const registerUser = asyncHandler(async (req, res) => {
           "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
           [name, email, hashedPassword]
         );
+        // Only send one response after successful insertion
         res.status(201).json({ message: "User registered successfully" });
       } catch (error) {
         if (error.errno === 1062) {
           res.status(409).json({ error: "User already exists" });
         } else {
+          console.log(error); // Log the error for debugging
           res.status(500).json({ error: "Something went wrong" });
         }
       }
     };
+
     const userExists = await checkUser(email);
     // res.json(userExists).send(); // sended false if the email is not registered
     if (userExists) {

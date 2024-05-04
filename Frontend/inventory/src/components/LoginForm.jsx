@@ -1,11 +1,14 @@
 import { Formik } from "formik";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+// Import useHistory from react-router-dom
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
 
 const LoginForm = () => {
+  const history = useNavigate();
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -19,12 +22,16 @@ const LoginForm = () => {
       },
       body: JSON.stringify(loginForm),
     });
-    const data = await response.json();
+    const resData = await response.json();
+    console.log(resData, "Here is response resData");
     MySwal.fire({
-      icon: data?.error ? "error" : "success",
+      icon: resData?.error ? "error" : "success",
       // title: "Success!",
-      text: data?.error || data?.message,
+      text: resData?.error || resData?.message,
     });
+    if (resData.message == "Login successful") {
+      history("/dashboard");
+    }
   };
   return (
     <div className="flex">

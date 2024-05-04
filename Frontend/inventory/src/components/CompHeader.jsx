@@ -1,7 +1,17 @@
 import { CiSearch } from "react-icons/ci";
 import profile from "../assets/profile.jpg";
+import { FaRegUserCircle } from "react-icons/fa";
+import { json } from "react-router-dom";
 
 export const CompHeader = ({ name }) => {
+  const getUserinfo = async () => {
+    const response = await fetch("http://localhost:5001/api/users/getuser", {
+      method: "GET",
+      headers: {},
+      body: JSON.stringify(),
+    });
+  };
+  // const profile = null;
   return (
     <div className="">
       <div className="flex justify-between items-center">
@@ -20,12 +30,18 @@ export const CompHeader = ({ name }) => {
           />
         </div>
         <div>
-          <div className="flex justify-center">
-            <img
-              src={profile}
-              className="w-[50px] rounded-xl mx-2"
-              alt="profile"
-            />
+          <div className="flex justify-center items-center">
+            {profile ? (
+              <img
+                src={profile}
+                className="w-[50px] rounded-xl mx-2"
+                alt="profile"
+              />
+            ) : (
+              <span className=" rounded-xl mx-2" alt="profile">
+                <FaRegUserCircle />
+              </span>
+            )}
             <button>
               <p className="font-poppins text-[16px] font-bold">John White</p>
               <p className="font-poppins text-[12px] font-light">Super Admin</p>
