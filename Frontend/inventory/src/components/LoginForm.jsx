@@ -4,11 +4,16 @@ import { useNavigate } from "react-router-dom";
 // Import useHistory from react-router-dom
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/slices/userSlice";
 
 const MySwal = withReactContent(Swal);
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const history = useNavigate();
+  const navigate = useNavigate();
+
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -30,7 +35,10 @@ const LoginForm = () => {
       text: resData?.error || resData?.message,
     });
     if (resData.message == "Login successful") {
-      history("/dashboard");
+      // history("/dashboard");
+
+      dispatch(addUser(resData));
+      navigate("/dashboard");
     }
   };
   return (

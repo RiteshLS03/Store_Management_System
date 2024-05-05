@@ -1,9 +1,13 @@
 import { CiSearch } from "react-icons/ci";
 import profile from "../assets/profile.jpg";
 import { FaRegUserCircle } from "react-icons/fa";
-import { json } from "react-router-dom";
+// import { json } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const CompHeader = ({ name }) => {
+  const data = useSelector((state) => {
+    return state.users;
+  });
   const getUserinfo = async () => {
     const response = await fetch("http://localhost:5001/api/users/getuser", {
       method: "GET",
@@ -14,7 +18,10 @@ export const CompHeader = ({ name }) => {
   // const profile = null;
   return (
     <div className="">
-      <div className="flex justify-between items-center">
+      <div
+        className="flex justify-between items-center"
+        // onClick={() => console.log(data)}
+      >
         <p className="font-bold font-poppins">{name}</p>
         <div className="flex justify-start items-center">
           <button
@@ -31,7 +38,7 @@ export const CompHeader = ({ name }) => {
         </div>
         <div>
           <div className="flex justify-center items-center">
-            {profile ? (
+            {data[0]?.userInfo?.user?.name?.profile ? (
               <img
                 src={profile}
                 className="w-[50px] rounded-xl mx-2"
@@ -39,12 +46,16 @@ export const CompHeader = ({ name }) => {
               />
             ) : (
               <span className=" rounded-xl mx-2" alt="profile">
-                <FaRegUserCircle />
+                <FaRegUserCircle size={40} />
               </span>
             )}
             <button>
-              <p className="font-poppins text-[16px] font-bold">John White</p>
-              <p className="font-poppins text-[12px] font-light">Super Admin</p>
+              <p className="font-poppins text-[16px] font-bold">
+                {data[0]?.userInfo?.user?.name}
+              </p>
+              <p className="font-poppins text-[12px] font-light">
+                {data[0]?.userInfo?.user?.email}
+              </p>
             </button>
           </div>
         </div>

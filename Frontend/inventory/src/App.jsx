@@ -1,9 +1,12 @@
 import React from "react";
+import { lazy, Suspense } from "react";
 // import { createRoot  } from "react-dom/client";
 import { createBrowserRouter, Link, Outlet } from "react-router-dom";
 import LoginUI from "./components/LoginUI";
-import Dashboard from "./components/Dashboard";
-
+// import ProtectedRoute from "./components/ProtectedRoute";
+const Dashboard = lazy(() => import("./components/Dashboard"));
+// const DashboardPage = lazy(() => import("./pages/DashboardUI/DashboardPage/DashboardPage"))
+// useDispatch
 // const App = () => {
 //   return <Outlet />;
 // };
@@ -16,7 +19,6 @@ export const appRouter = createBrowserRouter([
       <h1>
         Something Went Wrong
         <Link to={"/"} className="text-red-600">
-          {" "}
           Login
         </Link>
       </h1>
@@ -24,7 +26,13 @@ export const appRouter = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      // <ProtectedRoute>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Dashboard />
+      </Suspense>
+      // </ProtectedRoute>
+    ),
   },
 ]);
 

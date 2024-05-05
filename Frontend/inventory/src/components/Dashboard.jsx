@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { BiSolidPurchaseTagAlt } from "react-icons/bi";
@@ -9,6 +9,7 @@ import IssueUI from "./IssueUI";
 import DashboardUI from "./DashboardUI";
 
 const Dashboard = () => {
+  // useEffect(() => {}, []);
   const [dashboard, setDashboard] = useState({
     dashboard: true,
     purchase: false,
