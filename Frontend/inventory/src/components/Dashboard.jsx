@@ -10,6 +10,7 @@ import DashboardUI from "./DashboardUI";
 
 const Dashboard = () => {
   // useEffect(() => {}, []);
+  // console.log(user);
   const [dashboard, setDashboard] = useState({
     dashboard: true,
     purchase: false,

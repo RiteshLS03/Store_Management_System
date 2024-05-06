@@ -26,7 +26,7 @@ export const CompHeader = ({ name }) => {
         <div className="flex justify-start items-center">
           <button
             type="button"
-            className=" justify-start border-2 py-3 px-4 bg-white rounded-l-lg"
+            className="justify-start border-2 py-3 px-4 bg-white rounded-l-lg"
           >
             <CiSearch />
           </button>
@@ -51,10 +51,14 @@ export const CompHeader = ({ name }) => {
             )}
             <button>
               <p className="font-poppins text-[16px] font-bold">
-                {data[0]?.userInfo?.user?.name}
+                {data[0]?.userInfo?.user?.name
+                  ? data[0]?.userInfo?.user?.name
+                  : "John White"}
               </p>
               <p className="font-poppins text-[12px] font-light">
-                {data[0]?.userInfo?.user?.email}
+                {data[0]?.userInfo?.user?.email
+                  ? data[0]?.userInfo?.user?.email
+                  : "Johnwhite@email.com"}
               </p>
             </button>
           </div>

@@ -1,5 +1,5 @@
-import { Formik } from "formik";
-import { useState } from "react";
+import { FastField, Formik } from "formik";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // Import useHistory from react-router-dom
 import Swal from "sweetalert2";
@@ -13,6 +13,19 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const navigate = useNavigate();
+
+  // const [login, setLogin] = useState(localStorage.getItem("login"));
+  // const login = localStorage.getItem("login");
+
+  useEffect(() => {
+    let login = localStorage.getItem("login");
+    if (login) {
+      navigate("/");
+    } else {
+      navigate("/");
+      navigate("/dashboard");
+    }
+  }, []);
 
   const [loginForm, setLoginForm] = useState({
     email: "",
@@ -34,11 +47,13 @@ const LoginForm = () => {
       // title: "Success!",
       text: resData?.error || resData?.message,
     });
-    if (resData.message == "Login successful") {
-      // history("/dashboard");
-
+    if (resData.message === "Login successful") {
       dispatch(addUser(resData));
+      localStorage.setItem("login", true);
+      console.log(resData.message, resData);
+      // history("/dashboard");
       navigate("/dashboard");
+      // setLogin(localStorage.setItem("login", true));
     }
   };
   return (
