@@ -18,8 +18,9 @@ const LoginForm = () => {
   // const login = localStorage.getItem("login");
 
   useEffect(() => {
+    // localStorage.setItem()
     let login = localStorage.getItem("login");
-    if (login) {
+    if (!login) {
       navigate("/");
     } else {
       navigate("/");
@@ -50,6 +51,7 @@ const LoginForm = () => {
     if (resData.message === "Login successful") {
       dispatch(addUser(resData));
       localStorage.setItem("login", true);
+      localStorage.setItem("token", resData?.userInfo?.token);
       console.log(resData.message, resData);
       // history("/dashboard");
       navigate("/dashboard");

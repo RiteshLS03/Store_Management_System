@@ -3,8 +3,12 @@ import profile from "../assets/profile.jpg";
 import { FaRegUserCircle } from "react-icons/fa";
 // import { json } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const CompHeader = ({ name }) => {
+  const navigate = useNavigate();
+  const [dropDown, setDropDown] = useState(false);
   const data = useSelector((state) => {
     return state.users;
   });
@@ -16,6 +20,20 @@ export const CompHeader = ({ name }) => {
     });
   };
   // const profile = null;
+  const handleUserLog = () => {
+    // dropDown ? setDropDown(false) : setDropDown(true);
+    setDropDown(!dropDown);
+  };
+  const handleLogout = async () => {
+    // localStorage.removeItem("token");
+    localStorage.removeItem("login");
+    const res = await fetch("http://localhost:5001/api/users/logout", {
+      method: "GET",
+    });
+    const data = JSON.stringify(res);
+    console.log(data);
+    navigate("/");
+  };
   return (
     <div className="">
       <div
@@ -36,7 +54,7 @@ export const CompHeader = ({ name }) => {
             className=" py-2 px-4 bg-white rounded-md  justify-center items-center"
           />
         </div>
-        <div>
+        <div onClick={() => handleUserLog()}>
           <div className="flex justify-center items-center">
             {data[0]?.userInfo?.user?.name?.profile ? (
               <img
@@ -61,6 +79,21 @@ export const CompHeader = ({ name }) => {
                   : "Johnwhite@email.com"}
               </p>
             </button>
+            {dropDown && (
+              <div className="absolute top-16  bg-white border border-gray-200 shadow-md rounded-md">
+                <ul className="py-1">
+                  <li
+                    className="cursor-pointer px-4 py-2 hover:bg-gray-100 font-poppins"
+                    onClick={() => handleLogout()}
+                  >
+                    Logout
+                  </li>
+                  <li className="cursor-pointer px-4 py-2 hover:bg-gray-100 font-poppins">
+                    Change Password
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>
