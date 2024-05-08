@@ -6,7 +6,7 @@ const PurchaseUI = () => {
   return (
     <div className="px-6 py-4 h-screen">
       <CompHeader name={"Purchase"} />
-      <InputTable />
+      <InputTable button={<button>Add Purchase</button>} />
       <div className="flex justify-center items-center">
         <table className="table-auto">
           <thead className="">

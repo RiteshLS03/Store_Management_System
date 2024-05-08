@@ -5,6 +5,7 @@ const { loginUser } = require("../Controller/loginController");
 const { logoutUser } = require("../Controller/logoutController");
 const { getUser } = require("../Controller/getUserController");
 const protect = require("../Middleware/authMiddleware");
+const { addProduct } = require("../Controller/addProductController");
 
 // const registerUser = () => {};
 // Routes that can hit upon
@@ -12,5 +13,6 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/logout", logoutUser);
 router.get("/getuser", protect, getUser);
+router.post("/addproduct", protect, addProduct);
 
 module.exports = router;
