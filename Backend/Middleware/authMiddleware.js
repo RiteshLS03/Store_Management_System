@@ -3,12 +3,14 @@ const jwt = require("jsonwebtoken");
 // const User = require("../Models/userModel");
 const connection = require("../connection");
 
-const findByEmail = (email) => {
+const findByEmail = (id) => {
   return new Promise((resolve, reject) => {
     connection.query(
-      "SELECT * FROM users WHERE email = ?",
-      [email],
+      "SELECT * FROM users WHERE id = ?",
+      [id],
       (error, results, fields) => {
+        console.log(id);
+
         if (error) {
           reject(error);
         } else {
@@ -24,13 +26,17 @@ const protect = asyncHandler(async (req, res, next) => {
     const email = req.body.email;
     const token = req.cookies.token;
     if (!token) {
-      res.status(401).json({ error: "Not authorized, please login" });
+      res.status(401).json({ error: "Session expired, please login" });
     }
     // Verify the token
     const verified = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(verified, new Date(verified.iat), new Date(verified.exp));
     // Get user id from the token
-    const user = await findByEmail(email);
-    console.log(user);
+    const user = await findByEmail(verified?.id);
+    if (!user) {
+      res.status(401).json({ error: "Not authorized, please login" });
+    }
+
     if (user) {
       req.user = user;
       next();

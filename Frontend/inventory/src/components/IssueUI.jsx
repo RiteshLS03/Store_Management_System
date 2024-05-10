@@ -6,7 +6,18 @@ const IssueUI = ({ button }) => {
   return (
     <div className="px-6 py-4 h-screen">
       <CompHeader name={"Issue"} />
-      <InputTable button={<button>Issue Material</button>} />
+      {/* <InputTable button={<button>Issue Material</button>} /> */}
+      <InputTable
+        // handleSubmit={handleAddPurchase}
+        button={
+          <button
+            type="submit"
+            className="flex mx-auto border-2 rounded-lg p-4 text-white bg-[#363062] my-4"
+          >
+            Issue Material
+          </button>
+        }
+      />
       <div className="flex justify-center items-center">
         <table className="table-auto">
           <thead className="">

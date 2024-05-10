@@ -95,7 +95,6 @@ const loginUser = asyncHandler(async (req, res) => {
               if (passwordMatch) {
                 const token = generateToken(user.id);
                 const authUser = { user, token };
-                resolve(authUser);
                 res.cookie("token", token, {
                   path: "/",
                   httpOnly: true,
@@ -103,6 +102,7 @@ const loginUser = asyncHandler(async (req, res) => {
                   sameSite: "none",
                   secure: true,
                 });
+                resolve(authUser);
               } else {
                 reject(new Error("Incorrect password"));
               }

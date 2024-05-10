@@ -132,7 +132,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 
-const InputTable = ({ button }) => {
+const InputTable = ({ button, handleSubmit }) => {
   const validateField = (value) => {
     let error;
     if (!value) {
@@ -148,12 +148,14 @@ const InputTable = ({ button }) => {
           productName: "",
           quantity: "",
           unit: "",
-          price: "",
-          date: Date.now(),
+          price: "00.00",
+          // date: Date.now(),
         }}
         onSubmit={(values) => {
-          console.log(values); // You can replace this with your form submission logic
-          console.log(new Date(1715139958627));
+          // console.log(values); // You can replace this with your form submission logic
+          // // console.log();
+          // onSubmit(values);
+          handleSubmit(values);
         }}
       >
         {({ values, errors, touched }) => (
@@ -168,8 +170,8 @@ const InputTable = ({ button }) => {
                     placeholder="Product Name"
                     validate={validateField}
                   />
-                  {errors.productName && touched.productName && (
-                    <div>{errors.productName}</div>
+                  {errors?.productName && touched?.productName && (
+                    <div>{errors?.productName}</div>
                   )}
                 </div>
               </div>
@@ -197,7 +199,8 @@ const InputTable = ({ button }) => {
                   <option value="">Select</option>
                   <option value="kg">Kg</option>
                   <option value="ltr">Ltr</option>
-                  <option value="unit/piece">Unit/Piece</option>
+                  <option value="units">Units</option>
+                  <option value="Box">Box</option>
                   {/* <option></option> */}
                 </Field>
                 {errors.unit && touched.unit && <div>{errors.unit}</div>}
@@ -206,9 +209,11 @@ const InputTable = ({ button }) => {
                 <Field
                   name="price"
                   className="p-4 border-2 rounded-xl"
-                  type="select"
                   placeholder="Price of Purchase"
                   validate={validateField}
+                  type="number"
+                  step="0.01"
+                  // value="00.00"
                 >
                   {/* <option>1</option> */}
                 </Field>
@@ -225,16 +230,18 @@ const InputTable = ({ button }) => {
                 {errors.date && touched.date && <div>{errors.date}</div>}
               </div> */}
 
-              <button
+              {/* <button
                 type="submit"
                 className="flex mx-auto border-2 rounded-lg p-4 text-white bg-[#363062] my-4"
               >
                 {button}
-              </button>
+              </button> */}
+              {button}
             </div>
           </Form>
         )}
       </Formik>
+      {/* <ToastContainer /> */}
     </div>
   );
 };

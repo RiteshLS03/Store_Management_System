@@ -1,13 +1,74 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CompHeader } from "./CompHeader";
 import InputTable from "./InputTable";
+import { json } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PurchaseUI = () => {
+  const [purchaseData, setPurchaseData] = useState([]);
+  // useEffect(() => fetchPurchasedMaterial(), []);
+  const notify = () =>
+    toast("Purchase Successful!", {
+      position: "bottom-right",
+    });
+  const notifyError = () =>
+    toast.error("Problem while adding purchase", {
+      position: "bottom-right",
+    });
+  const fetchPurchasedMaterial = async () => {
+    try {
+      const res = await fetch("http://localhost:5001/api/users/purchases", {
+        method: "GET",
+        // body :
+      });
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchPurchasedMaterial();
+  }, []);
+
+  const handleAddPurchase = async (values) => {
+    try {
+      console.log(values);
+      const res = await fetch("http://localhost:5001/api/users/addproduct", {
+        method: "POST",
+        // body: JSON.stringify(values),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const data = await res.json();
+      console.log(data.message);
+      // const data = await res.json();
+      if (data?.message) {
+        notify();
+      } else {
+        notifyError();
+      }
+    } catch (error) {
+      notifyError();
+    }
+  };
   return (
     <div className="px-6 py-4 h-screen">
       <CompHeader name={"Purchase"} />
-      <InputTable button={<button>Add Purchase</button>} />
+      <InputTable
+        handleSubmit={handleAddPurchase}
+        button={
+          <button
+            type="submit"
+            className="flex mx-auto border-2 rounded-lg p-4 text-white bg-[#363062] my-4"
+          >
+            Add Purchase
+          </button>
+        }
+      />
       <div className="flex justify-center items-center">
+        <ToastContainer />
         <table className="table-auto">
           <thead className="">
             <tr>
@@ -44,6 +105,7 @@ const PurchaseUI = () => {
               <td className="border-2 p-4 text-center">360000</td>
               <td className="border-2 p-4 text-center">12/02/2024</td>
             </tr>
+            {}
           </tbody>
         </table>
       </div>
