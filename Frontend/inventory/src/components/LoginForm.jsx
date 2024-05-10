@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/slices/userSlice";
+import { CiKeyboard } from "react-icons/ci";
+import { useCookies } from "react-cookie";
 
 const MySwal = withReactContent(Swal);
 
@@ -13,6 +15,7 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["token"]);
 
   // const [login, setLogin] = useState(localStorage.getItem("login"));
   // const login = localStorage.getItem("login");
@@ -42,6 +45,12 @@ const LoginForm = () => {
       body: JSON.stringify(loginForm),
     });
     const resData = await response.json();
+    console.log(resData);
+    // document.setCookie;
+    // document.cookie(myCookie=${resData.userInfo.token});
+    // document.cookie(
+    //   `myCookie=${resData}; expires=Wed, 31 Dec 2099 23:59:59 GMT; path=/`
+    // );
     console.log(resData, "Here is response resData");
     MySwal.fire({
       icon: resData?.error ? "error" : "success",
@@ -52,6 +61,11 @@ const LoginForm = () => {
       dispatch(addUser(resData));
       localStorage.setItem("login", true);
       localStorage.setItem("token", resData?.userInfo?.token);
+      setCookie("token", resData?.userInfo?.token, { path: "/" });
+      console.log(cookies.token);
+
+      // "token", resData?.userInfo?.token;
+
       console.log(resData.message, resData);
       // history("/dashboard");
       navigate("/dashboard");

@@ -96,7 +96,7 @@ const loginUser = asyncHandler(async (req, res) => {
                 const token = generateToken(user.id);
                 const authUser = { user, token };
                 res.cookie("token", token, {
-                  path: "/",
+                  path: "/purchases",
                   httpOnly: true,
                   expires: new Date(Date.now() + 1000 * 7200), // 2 Hours
                   sameSite: "none",
@@ -111,6 +111,7 @@ const loginUser = asyncHandler(async (req, res) => {
         }
       );
     });
+
     res.status(200).json({ message: "Login successful", userInfo: response });
   } catch (error) {
     res

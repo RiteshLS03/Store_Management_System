@@ -17,7 +17,7 @@ const Dashboard = () => {
     issue: false,
   });
   return (
-    <div className="bg-[#f9f9f9] flex h-screen font-poppins">
+    <div className="bg-[#f9f9f9] flex font-poppins h-screen">
       <div className="w-1/4 p-12 bg my-4 bg-white rounded-3xl">
         <div className="grid gap-10 ">
           <button
@@ -48,7 +48,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="w-3/4">
+      <div className="w-3/4 overflow-auto">
         {dashboard.dashboard ? (
           <DashboardUI />
         ) : dashboard.purchase ? (
