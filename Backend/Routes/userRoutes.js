@@ -7,6 +7,7 @@ const { getUser } = require("../Controller/getUserController");
 const protect = require("../Middleware/authMiddleware");
 const { addProduct } = require("../Controller/addProductController");
 const getPurchases = require("../Controller/getPurchasesController");
+const issueProduct = require("../Controller/issueProductController");
 
 // const registerUser = () => {};
 // Routes that can hit upon
@@ -16,5 +17,6 @@ router.get("/logout", logoutUser);
 router.get("/getuser", protect, getUser);
 router.post("/addproduct", addProduct);
 router.get("/purchases", getPurchases);
+router.post("/issueProduct", issueProduct);
 
 module.exports = router;

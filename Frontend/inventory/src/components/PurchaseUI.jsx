@@ -198,6 +198,7 @@ const PurchaseUI = () => {
       <CompHeader name={"Purchase"} />
       <InputTable
         handleSubmit={handleAddPurchase}
+        purchaseData={purchaseData}
         button={
           <button
             type="submit"
@@ -233,7 +234,7 @@ const PurchaseUI = () => {
                 </td>
                 <td className="border-2 p-4 text-center">
                   {data.purchase_date.slice(0, 10)}
-                </td>{" "}
+                </td>
                 {/* <td className="border-2 p-4 text-center">
                   {data.purchase_date.slice(11, 19)}
                 </td> */}

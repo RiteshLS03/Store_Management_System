@@ -1,14 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { CompHeader } from "./CompHeader";
 import InputTable from "./InputTable";
 
+const fetchPurchasedMaterial = async (setPurchaseData) => {
+  try {
+    const res = await fetch("http://localhost:5001/api/users/purchases", {
+      method: "GET",
+    });
+    const data = await res.json();
+    console.log(data);
+    setPurchaseData(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const IssueUI = ({ button }) => {
+  const [purchaseData, setPurchaseData] = useState([]);
+
+  useEffect(() => {
+    fetchPurchasedMaterial(setPurchaseData);
+  }, []);
+  // fetchPurchasedMaterial(setPurchaseData);
+
+  const handleIssueUI = (data) => {
+    console.log(data);
+    const res = fetch("http://localhost:5001/api/users/issueProduct", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  };
+
   return (
     <div className="px-6 py-4 h-screen">
       <CompHeader name={"Issue"} />
       {/* <InputTable button={<button>Issue Material</button>} /> */}
       <InputTable
-        // handleSubmit={handleAddPurchase}
+        handleSubmit={handleIssueUI}
+        purchaseData={purchaseData}
+        IssueUI={true}
         button={
           <button
             type="submit"
@@ -31,7 +64,7 @@ const IssueUI = ({ button }) => {
             </tr>
           </thead>
           <tbody>
-            <tr className="">
+            {/* <tr className="">
               <td className="border-2 p-4 text-center">Bearing Steel 300MM</td>
               <td className="border-2 p-4 text-center">Piece</td>
               <td className="border-2 p-4 text-center">30</td>
@@ -54,7 +87,7 @@ const IssueUI = ({ button }) => {
               <td className="border-2 p-4 text-center">300</td>
               <td className="border-2 p-4 text-center">90000</td>
               <td className="border-2 p-4 text-center">15/02/2024</td>
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>

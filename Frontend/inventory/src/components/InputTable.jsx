@@ -129,10 +129,29 @@
 
 // export default InputTable;
 
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
+import IssueUI from "./IssueUI";
 
-const InputTable = ({ button, handleSubmit }) => {
+// const fetchPurchasedMaterial = async (setPurchaseData2) => {
+//   try {
+//     const res = await fetch("http://localhost:5001/api/users/purchases", {
+//       method: "GET",
+//     });
+//     const data = await res.json();
+//     console.log(data);
+//     setPurchaseData2(data);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+const InputTable = ({ button, handleSubmit, purchaseData, IssueUI }) => {
+  // const [purchaseData2, setPurchaseData2] = useState(purchaseData);
+  // useEffect(() => {
+  //   fetchPurchasedMaterial(setPurchaseData2);
+  // }, []);
+  // fetchPurchasedMaterial(setPurchaseData2);
   const validateField = (value) => {
     let error;
     if (!value) {
@@ -156,6 +175,7 @@ const InputTable = ({ button, handleSubmit }) => {
           // // console.log();
           // onSubmit(values);
           handleSubmit(values);
+          console.log(values);
         }}
       >
         {({ values, errors, touched }) => (
@@ -163,13 +183,59 @@ const InputTable = ({ button, handleSubmit }) => {
             <div className="flex justify-center items-center p-8 gap-2">
               <div className="text-center ">
                 <div>
-                  <Field
+                  {/* <Field
                     name="productName"
                     className="p-4 border-2 rounded-xl"
                     type="text"
                     placeholder="Product Name"
                     validate={validateField}
                   />
+                  <select name="" id="">
+                    <option></option>
+                  </select> */}
+                  {/* <Field
+                    type="text"
+                    name="ProductName"
+                    className="px-4 py-4 border-2 rounded-xl"
+                    placeholder="New product name"
+                    validate={validateField}
+                  /> */}
+                  {IssueUI ? (
+                    <Field
+                      type="text"
+                      as="select"
+                      name="productName"
+                      className="p-4 border-2 rounded-xl"
+                      placeholder="Product Name"
+                      validate={validateField}
+                      // onClick={() => {}}
+                    >
+                      {/* <Field type="text"></Field> */}
+                      <option value="">Product Name</option>
+                      {purchaseData.map((product) => {
+                        return (
+                          <option key={product?.id} value={product?.name}>
+                            {product.name}
+                          </option>
+                        );
+                      })}
+                      {/* <option>
+                      <input type="text"></input>
+                    </option> */}
+                      {/* <option value="other">Other</option>{" "} */}
+                      {/* Add this option for custom input */}
+                    </Field>
+                  ) : (
+                    <Field
+                      type="text"
+                      name="productName"
+                      className="px-4 py-4 border-2 rounded-xl"
+                      placeholder="New product name"
+                      validate={validateField}
+                    />
+                  )}
+                  {/* Render the input field conditionally based on the selected value */}
+
                   {errors?.productName && touched?.productName && (
                     <div>{errors?.productName}</div>
                   )}

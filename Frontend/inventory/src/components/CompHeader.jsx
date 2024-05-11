@@ -59,7 +59,7 @@ export const CompHeader = ({ name }) => {
         </div>
         <div onClick={() => handleUserLog()}>
           <div className="flex justify-center items-center">
-            {data[0]?.userInfo?.user?.name?.profile ? (
+            {data[data.length - 1]?.userInfo?.user?.name?.profile ? (
               <img
                 src={profile}
                 className="w-[50px] rounded-xl mx-2"
@@ -72,13 +72,13 @@ export const CompHeader = ({ name }) => {
             )}
             <button>
               <p className="font-poppins text-[16px] font-bold">
-                {data[0]?.userInfo?.user?.name
-                  ? data[0]?.userInfo?.user?.name
+                {data[data.length - 1]?.userInfo?.user?.name
+                  ? data[data.length - 1]?.userInfo?.user?.name
                   : "John White"}
               </p>
               <p className="font-poppins text-[12px] font-light">
-                {data[0]?.userInfo?.user?.email
-                  ? data[0]?.userInfo?.user?.email
+                {data[data.length - 1]?.userInfo?.user?.email
+                  ? data[data.length - 1]?.userInfo?.user?.email
                   : "Johnwhite@email.com"}
               </p>
             </button>
