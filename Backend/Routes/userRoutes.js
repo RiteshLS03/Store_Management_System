@@ -9,7 +9,6 @@ const { addProduct } = require("../Controller/addProductController");
 const getPurchases = require("../Controller/getPurchasesController");
 const issueProduct = require("../Controller/issueProductController");
 
-// const registerUser = () => {};
 // Routes that can hit upon
 router.post("/register", registerUser);
 router.post("/login", loginUser);
