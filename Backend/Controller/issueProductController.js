@@ -37,7 +37,8 @@ const issueProduct = asyncHandler(async (req, res) => {
                   }
                 );
               } else {
-                reject(new Error("Insufficient stock"));
+                // reject(new Error("Insufficient stock"));
+                resolve({ error: "Insufficient stock" });
               }
               //   resolve(product);
               //   console.log(product);

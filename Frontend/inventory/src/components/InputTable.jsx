@@ -170,12 +170,13 @@ const InputTable = ({ button, handleSubmit, purchaseData, IssueUI }) => {
           price: "00.00",
           // date: Date.now(),
         }}
-        onSubmit={(values) => {
+        onSubmit={(values, { resetForm }) => {
           // console.log(values); // You can replace this with your form submission logic
           // // console.log();
           // onSubmit(values);
           handleSubmit(values);
           console.log(values);
+          resetForm();
         }}
       >
         {({ values, errors, touched }) => (

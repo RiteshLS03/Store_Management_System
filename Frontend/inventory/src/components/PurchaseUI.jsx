@@ -215,8 +215,8 @@ const PurchaseUI = () => {
             <tr>
               <th className="border-2 p-4 text-normal">Product Name</th>
               <th className="border-2 p-4 text-normal">Quantity</th>
-              <th className="border-2 p-4 text-normal">Price of Unit</th>
               <th className="border-2 p-4 text-normal">Unit</th>
+              <th className="border-2 p-4 text-normal">Price of Unit</th>
               <th className="border-2 p-4 text-normal">Total Price</th>
               <th className="border-2 p-4 text-normal">Purchase Date</th>
               {/* <th className="border-2 p-4 text-normal">Time</th> */}
