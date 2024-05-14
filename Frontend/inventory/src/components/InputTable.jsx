@@ -276,7 +276,7 @@ const InputTable = ({ button, handleSubmit, purchaseData, IssueUI }) => {
                 <Field
                   name="price"
                   className="p-4 border-2 rounded-xl"
-                  placeholder="Price of Purchase"
+                  placeholder="Price"
                   validate={validateField}
                   type="number"
                   step="0.01"

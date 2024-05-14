@@ -114,21 +114,48 @@
 
 // export default ProtectedRoute;
 
-import React, { useEffect } from "react";
-import Dashboard from "./Dashboard";
-import { Navigate, useNavigate } from "react-router-dom";
-import LoginUI from "./LoginUI";
+// import React, { useEffect } from "react";
+// import Dashboard from "./Dashboard";
+// import { Navigate, useNavigate } from "react-router-dom";
+// import LoginUI from "./LoginUI";
+// import Cookies from "js-cookie";
 
-const ProtectedRoute = ({ Dashboard }) => {
+// const ProtectedRoute = ({ Dashboard }) => {
+//   const navigate = useNavigate();
+//   // if (localStorage.getItem("login") === true) {
+//   //   return <Dashboard />;
+//   // } else if (localStorage.getItem("login") === false) {
+//   //   return navigate("/");
+//   // }
+//   const token = Cookies.get("token");
+//   const login = localStorage.getItem("login");
+//   useEffect(() => (login || token ? Dashboard : navigate("/")), []);
+//   return login || token ? Dashboard : navigate("/");
+// };
+
+// export default ProtectedRoute;
+
+import React, { useState, useEffect } from "react";
+import Dashboard from "./Dashboard";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+
+const ProtectedRoute = () => {
+  // const [token, setToken] = useState(null);
+  // setToken(Cookies.get("token"));
+  const token = Cookies.get("token");
   const navigate = useNavigate();
-  // if (localStorage.getItem("login") === true) {
-  //   return <Dashboard />;
-  // } else if (localStorage.getItem("login") === false) {
-  //   return navigate("/");
-  // }
-  const login = localStorage.getItem("login");
-  useEffect(() => (login ? Dashboard : navigate("/")), []);
-  return login ? Dashboard : navigate("/");
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    } else if (token) {
+      navigate("/dashboard");
+    }
+  }, [token, navigate]);
+
+  return token ? <Dashboard /> : null;
+  // return <Dashboard />;
 };
 
 export default ProtectedRoute;

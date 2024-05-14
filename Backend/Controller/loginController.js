@@ -75,6 +75,7 @@ const generateToken = (id) => {
 
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  console.log(req);
   try {
     const response = await new Promise((resolve, reject) => {
       connection.query(
@@ -96,12 +97,13 @@ const loginUser = asyncHandler(async (req, res) => {
                 const token = generateToken(user.id);
                 const authUser = { user, token };
                 res.cookie("token", token, {
-                  path: "/purchases",
+                  path: "/",
                   httpOnly: true,
-                  expires: new Date(Date.now() + 1000 * 7200), // 2 Hours
-                  sameSite: "none",
+                  // expires: new Date(Date.now() + 1000 * 7200), // 2 Hours
+                  // sameSite: "none",
                   secure: true,
                 });
+                // res.send("Cookies")
                 resolve(authUser);
               } else {
                 reject(new Error("Incorrect password"));

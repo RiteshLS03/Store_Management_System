@@ -32,7 +32,7 @@ const asyncHandler = require("express-async-handler");
 const connection = require("../connection");
 
 const addProduct = asyncHandler(async (req, res) => {
-  console.log(req);
+  console.log(req.cookies);
   const { productName, quantity, unit, price } = req.body;
   try {
     // Assuming connection.query returns a promise

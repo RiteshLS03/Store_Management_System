@@ -5,7 +5,9 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Cookies } from "react-cookie";
+// import { Cookies } from "react-cookie";
+// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 export const CompHeader = ({ name }) => {
   const navigate = useNavigate();
@@ -26,16 +28,21 @@ export const CompHeader = ({ name }) => {
     setDropDown(!dropDown);
   };
   const handleLogout = async () => {
+    console.log(Cookies.get());
+    console.log(Cookies.get());
+    Cookies.remove("token");
+    navigate("/");
+    // Cookies.remove("token");
+
     // localStorage.removeItem("token");
     // localStorage.removeItem("login");
-    localStorage.clear();
-    const res = await fetch("http://localhost:5001/api/users/logout", {
-      method: "GET",
-    });
-    const data = JSON.stringify(res);
+    // localStorage.clear();
+    // const res = await fetch("http://localhost:5001/api/users/logout", {
+    //   method: "GET",
+    // });
+    // const data = JSON.stringify(res);
 
-    console.log(data);
-    navigate("/");
+    // console.log(data);
   };
   return (
     <div className="">

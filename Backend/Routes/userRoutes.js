@@ -15,7 +15,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/logout", logoutUser);
 router.get("/getuser", protect, getUser);
-router.post("/addproduct", addProduct);
+router.post("/addproduct", protect, addProduct);
 router.get("/purchases", getPurchases);
 router.post("/issueProduct", issueProduct);
 router.get("/getIssuedData", getIssuedData);

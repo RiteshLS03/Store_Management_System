@@ -6,8 +6,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/slices/userSlice";
-import { CiKeyboard } from "react-icons/ci";
-import { useCookies } from "react-cookie";
+import Cookies from "js-cookie";
 
 const MySwal = withReactContent(Swal);
 
@@ -15,21 +14,21 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["token"]);
+  // const [cookies, setCookie] = useCookies(["token"]);
 
   // const [login, setLogin] = useState(localStorage.getItem("login"));
   // const login = localStorage.getItem("login");
 
-  useEffect(() => {
-    // localStorage.setItem()
-    let login = localStorage.getItem("login");
-    if (!login) {
-      navigate("/");
-    } else {
-      navigate("/");
-      navigate("/dashboard");
-    }
-  }, []);
+  // useEffect(() => {
+  //   // localStorage.setItem()
+  //   let login = localStorage.getItem("login");
+  //   if (!login) {
+  //     navigate("/");
+  //   } else {
+  //     navigate("/");
+  //     navigate("/dashboard");
+  //   }
+  // }, []);
 
   const [loginForm, setLoginForm] = useState({
     email: "",
@@ -42,6 +41,7 @@ const LoginForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(loginForm),
     });
     const resData = await response.json();
@@ -57,18 +57,26 @@ const LoginForm = () => {
       // title: "Success!",
       text: resData?.error || resData?.message,
     });
+    // For set minutes expiration
+    const date = new Date();
+    date.setTime(date.getTime() + 5 * 60 * 1000); // 30 minute in milliseconds for token expiration
     if (resData.message === "Login successful") {
+      console.log(resData);
       dispatch(addUser(resData));
-      localStorage.setItem("login", true);
-      localStorage.setItem("token", resData?.userInfo?.token);
-      setCookie("token", resData?.userInfo?.token, { path: "/" });
-      console.log(cookies.token);
-
-      // "token", resData?.userInfo?.token;
-
-      console.log(resData.message, resData);
-      // history("/dashboard");
       navigate("/dashboard");
+      // Cookies.set("token", resData?.userInfo?.token, {
+      //   path: "/",
+      //   expires: date,
+      // });
+      // setCookie("token", resData.userInfo.token, { path: "/" });
+      // localStorage.setItem("login", true);
+      // localStorage.setItem("token", resData?.userInfo?.token);
+      // setCookie("token", resData?.userInfo?.token, { path: "/" });
+      // console.log(cookies.token);
+      // "token", resData?.userInfo?.token;
+      // console.log(resData.message, resData);
+      // history("/dashboard");
+      // navigate("/dashboard");
       // setLogin(localStorage.setItem("login", true));
     }
   };
