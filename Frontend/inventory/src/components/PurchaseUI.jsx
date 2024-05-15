@@ -166,8 +166,8 @@ const PurchaseUI = () => {
       position: "bottom-right",
     });
 
-  const notifyError = () =>
-    toast.error("Problem while adding purchase", {
+  const notifyError = (error) =>
+    toast.error(`${error}`, {
       position: "bottom-right",
     });
 
@@ -189,7 +189,7 @@ const PurchaseUI = () => {
       // Refresh the purchased material after adding
       fetchPurchasedMaterial(setPurchaseData);
     } catch (error) {
-      notifyError();
+      notifyError(error);
     }
   };
 

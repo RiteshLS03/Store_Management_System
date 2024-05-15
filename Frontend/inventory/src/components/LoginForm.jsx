@@ -63,11 +63,11 @@ const LoginForm = () => {
     if (resData.message === "Login successful") {
       console.log(resData);
       dispatch(addUser(resData));
+      Cookies.set("token", resData?.userInfo?.token, {
+        path: "/",
+        expires: date,
+      });
       navigate("/dashboard");
-      // Cookies.set("token", resData?.userInfo?.token, {
-      //   path: "/",
-      //   expires: date,
-      // });
       // setCookie("token", resData.userInfo.token, { path: "/" });
       // localStorage.setItem("login", true);
       // localStorage.setItem("token", resData?.userInfo?.token);

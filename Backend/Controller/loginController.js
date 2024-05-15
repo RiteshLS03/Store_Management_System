@@ -99,9 +99,9 @@ const loginUser = asyncHandler(async (req, res) => {
                 res.cookie("token", token, {
                   path: "/",
                   httpOnly: true,
+                  secure: true,
                   // expires: new Date(Date.now() + 1000 * 7200), // 2 Hours
                   // sameSite: "none",
-                  secure: true,
                 });
                 // res.send("Cookies")
                 resolve(authUser);

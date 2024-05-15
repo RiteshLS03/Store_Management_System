@@ -29,13 +29,11 @@ const findByEmail = (id) => {
 };
 
 const protect = asyncHandler(async (req, res, next) => {
-  // console.log(req.cookies);
-  // const authHeader = req.headers["authorization"];
-  // console.log(authHeader);
   try {
-    // const email = req.body.email;
+    console.log(req);
     console.log(req.cookies);
     const token = req.cookies.token;
+    console.log(token);
     if (!token) {
       res.status(401).json({ error: "Session expired, please login" });
     }
@@ -47,12 +45,11 @@ const protect = asyncHandler(async (req, res, next) => {
     if (!user) {
       return res.status(401).json({ error: "Not authorized, please login" });
     }
-    next();
-    // if (user) {
-    //   req.user = user;
-    //   next();
-    // }
-    return;
+    // return next();
+    if (user) {
+      req.user = user;
+      return next();
+    }
     // Fetch the user using sequilize
   } catch (error) {
     res.status(401).json({ error: "Not authorized, please login" });

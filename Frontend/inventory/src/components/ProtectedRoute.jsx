@@ -143,9 +143,11 @@ import Cookies from "js-cookie";
 const ProtectedRoute = () => {
   // const [token, setToken] = useState(null);
   // setToken(Cookies.get("token"));
-  const token = Cookies.get("token");
+  // const token = Cookies.get("token");
+  // console.log(Cookies.get());
+  const token = localStorage.getItem("login");
   const navigate = useNavigate();
-
+  console.log(token);
   useEffect(() => {
     if (!token) {
       navigate("/");
